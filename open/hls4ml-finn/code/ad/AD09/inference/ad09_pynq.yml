@@ -2,7 +2,7 @@ convert:
   Build: True
   FIFO_opt: False
   vivado_path: '/tools/Xilinx/Vivado/2019.1/bin:'
-  model_file: ../training/model/ad09/model_ToyCar.h5
+  model_file: ../training/trained_model/ad09/model_ToyCar.h5
   hls_config: hls4ml_config.yml
   board_name: pynq-z2
   fpga_part: xc7z020clg400-1

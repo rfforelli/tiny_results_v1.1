@@ -44,7 +44,7 @@ train:
       sparsity: None
       initial_sparsity: 0
       final_sparsity: 0.9
-  model_directory: ./model/ad09
+  model_directory: ./trained_model/ad09
   result_directory: ./result/ad09
   result_file: result.csv
 convert:
