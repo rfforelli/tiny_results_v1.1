@@ -75,7 +75,7 @@ def main(args):
     hls4ml.model.optimizer.OutputRoundingSaturationMode.rounding_mode = 'AP_RND'
     hls4ml.model.optimizer.OutputRoundingSaturationMode.saturation_mode = 'AP_SAT'
     hls_config = yaml_load(HLS_CONFIG)
-    hls_config['Model']['Strategy'] = 'Resource'
+    hls_config['Model']['Strategy'] = 'Latency'
     hls_config['Model']['Precision'] = 'ap_fixed<16,8>'
     hls_config['LayerName']['input_1']['Precision'] = 'ap_fixed<8,8>'
     for layer in hls_config['LayerName'].keys():
