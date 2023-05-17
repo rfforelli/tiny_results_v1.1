@@ -86,7 +86,7 @@ def process_hls():
     replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer18', 'layer17')
 
     # Replace occurrences of result_t with layer17_t
-    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'result_t', 'layer17_t')
+    replace_text('./pynq-z2/hls/vivado_project/firmware/defines.h', 'typedef nnet::array<ap_fixed<16,8,AP_RND,AP_SAT>, 64*1> result_t;', 'typedef nnet::array<ap_fixed<16,8>, 64*1> result_t;')
 
     # Process the file to add "// " to lines with "nnet::linear"
     process_file('./pynq-z2/hls/vivado_project/firmware/myproject.cpp')
