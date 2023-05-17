@@ -82,8 +82,13 @@ def process_hls():
     # Replace occurrences of layer15 with layer14
     replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer15', 'layer14')
 
-    # Replace occurrences of result_t with layer17_t
+    # Remove AP_SAT & AP_RND from result precision
     replace_text('./pynq-z2/hls/vivado_project/firmware/defines.h', 'typedef nnet::array<ap_fixed<16,8,AP_RND,AP_SAT>, 64*1> result_t;', 'typedef nnet::array<ap_fixed<16,8>, 64*1> result_t;')
+
+    # layer17_out is the output layer
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'hls::stream<result_t> &layer18_out', 'hls::stream<result_t> &layer17_out')
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'hls::stream<layer17_t> layer17_out("layer17_out");', '// hls::stream<layer17_t> layer17_out("layer17_out");')
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', '#pragma HLS STREAM variable=layer17_out depth=1', '// #pragma HLS STREAM variable=layer17_out depth=1')
 
     # Process the file to add "// " to lines with "nnet::linear"
     process_file('./pynq-z2/hls/vivado_project/firmware/myproject.cpp')
