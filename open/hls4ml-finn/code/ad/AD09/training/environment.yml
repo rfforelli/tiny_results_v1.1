@@ -23,3 +23,4 @@ dependencies:
     - setgpu==0.0.7
     - mplhep==0.3.21
     - librosa==0.8.0
+    - protobuf==3.20.*
