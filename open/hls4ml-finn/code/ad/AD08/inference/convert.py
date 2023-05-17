@@ -11,6 +11,37 @@ import hls4ml
 from hls4ml.converters import convert_from_keras_model
 import matplotlib.pyplot as plt
 
+def process_file(file_path):
+    modified_lines = []
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+        for i, line in enumerate(lines):
+            if 'nnet::linear' in line:
+                # Add "// " to the current line
+                modified_lines.append("// " + line)
+
+                # Add "// " to the two preceding lines
+                if i >= 2 and (lines[i-2] != '\n') and (lines[i-1] != '\n'):
+                    modified_lines[i-2] = "// " + lines[i-2]
+                    modified_lines[i-1] = "// " + lines[i-1]
+
+            else:
+                modified_lines.append(line)
+
+    with open(file_path, 'w') as file:
+        file.writelines(modified_lines)
+
+def replace_text(file_path, search_text, replace_text):
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    modified_content = content.replace(search_text, replace_text)
+
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
+
+
 def is_tool(name):
     from distutils.spawn import find_executable
     return find_executable(name) is not None
@@ -35,6 +66,32 @@ def load_model(file_path):
     co = {}
     _add_supported_quantized_objects(co)  
     return tf.keras.models.load_model(file_path, custom_objects=co)
+
+
+def process_hls():
+    # Replace occurrences of layer3 with layer2
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer3', 'layer2')
+
+    # Replace occurrences of layer6 with layer5
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer6', 'layer5')
+
+    # Replace occurrences of layer9 with layer8
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer9', 'layer8')
+
+    # Replace occurrences of layer12 with layer11
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer12', 'layer11')
+
+    # Replace occurrences of layer15 with layer14
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer15', 'layer14')
+
+    # Replace occurrences of layer18 with layer17
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'layer18', 'layer17')
+
+    # Replace occurrences of result_t with layer17_t
+    replace_text('./pynq-z2/hls/vivado_project/firmware/myproject.cpp', 'result_t', 'layer17_t')
+
+    # Process the file to add "// " to lines with "nnet::linear"
+    process_file('./pynq-z2/hls/vivado_project/firmware/myproject.cpp')
 
 
 def main(args):
@@ -106,6 +163,7 @@ def main(args):
 
     #hls4ml.utils.plot_model(hls_model, show_shapes=True, show_precision=True, to_file='{}/model_hls4ml.png'.format(OUTPUT_DIR))
     hls_model.compile()
+    process_hls() #Remove linear layers, they are not needed
 
     # profiling / testing
     PROFILE_DIR = OUTPUT_DIR+'/hls4ml_profiling_plots'
