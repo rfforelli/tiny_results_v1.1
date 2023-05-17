@@ -161,7 +161,7 @@ def main(args):
 
     #hls4ml.utils.plot_model(hls_model, show_shapes=True, show_precision=True, to_file='{}/model_hls4ml.png'.format(OUTPUT_DIR))
     hls_model.compile()
-    process_hls() #Remove linear HLS layers, they are not needeed.
+    process_hls() #Remove linear HLS layers, they are not needed.
 
     # profiling / testing
     PROFILE_DIR = OUTPUT_DIR+'/hls4ml_profiling_plots'
