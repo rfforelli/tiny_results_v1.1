@@ -1,12 +1,12 @@
 # Boot from Flash
 0. Under the `<project>_standalone` project, in `submitter_implemented.h`, make sure to set `#define EE_CFG_ENERGY_MODE` to `1`. This enables the configuation changes required to run energy benchmarks
-1. In the SDK, select  `<project>_bootloader` in _Project Explorer_
+1. In the SDK, select  `<project>_standalone` in _Project Explorer_
 2. Click: `Xilinx >> Create Boot Image`
 3. Click: `Add`
 
 <img src="img/01.png" width=600/>
 
-4. Select: `<project>_standalone`
+4. Select: `<project>_standalone`. Note that there should now be three image partitions listed in the following order: `<project>_fsbl`, `bitstream.bit`, `<project>_standalone`
 
 <img src="img/02.png" width=600/>
 

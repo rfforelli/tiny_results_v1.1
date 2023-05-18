@@ -31,7 +31,7 @@ conda activate tiny
 
 ```
 ## Train model
-The training script `train.py` takes one argument, which is `-c` or `--config` which accepts a `.yml` model configuration file. If none is selected, a default `ad08.yml`' file in the working directory will be selected.
+The training script `train.py` takes one argument, which is `-c` or `--config` which accepts a `.yml` model configuration file. If none is selected, a default `ad09.yml`' file in the working directory will be selected.
 
 ## Test model
-After a model has been trained, the test script works similarly to the training script. Argument is `.yml` config file, default is again a  `ad08.yml` file in the working directory.
+After a model has been trained, the test script works similarly to the training script. Argument is `.yml` config file, default is again a  `ad09.yml` file in the working directory.
